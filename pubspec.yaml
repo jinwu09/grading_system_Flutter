@@ -36,7 +36,11 @@ dependencies:
   cupertino_icons: ^1.0.2
 
   # Database Storage
-  sqflite: ^2.0.0+3
+  sqflite: ^2.0.2+1
+  get: ^4.6.5
+  fluent_ui: ^3.12.0
+  path_provider: ^2.0.11
+  sqflite_common_ffi: ^2.1.1+1
 
 dev_dependencies:
   flutter_test:

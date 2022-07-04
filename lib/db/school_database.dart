@@ -1,14 +1,17 @@
-import 'package:flutter/cupertino.dart';
+
+import 'dart:developer';
+
 import 'package:path/path.dart';
+import 'package:path_provider/path_provider.dart';
 import 'package:sqflite/sqflite.dart';
 import 'package:grading_system/db/model.dart';
 
-class SchoolDatabase{
-  static final SchoolDatabase instance = SchoolDatabase._init();
+class LocalDatabase{
+  static final LocalDatabase instance = LocalDatabase._init();
 
   static Database? _database;
 
-  SchoolDatabase._init();
+  LocalDatabase._init();
 
   Future<Database> get database async {
     if (_database != null) return _database!;
@@ -17,14 +20,17 @@ class SchoolDatabase{
     return _database!;
   }
 
-  Future<Database> _initDB(String filepath) async{
-    final dbPath = await getDatabasesPath();
-    final path = join (dbPath, filepath);
+  Future<Database> _initDB(String filePath) async{
+    final dbPath = await getApplicationDocumentsDirectory();
+    // log(${getDatabasesPath()},);
+    // final dbPath = await getDatabasesPath();
+    final path = join (dbPath.toString(), filePath);
 
     return await openDatabase(path, version: 1, onCreate: _createDB);
   }
 
   Future _createDB(Database db, int version) async {
+    // log("creating database");
     final idType = 'INTEGER PRIMARY KEY AUTOINCREMENT';
     final integerType = 'INTEGER NOT NULL';
     final textType = 'TEXT NOT NULL';
