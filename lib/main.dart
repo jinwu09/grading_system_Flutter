@@ -1,9 +1,18 @@
 import 'package:fluent_ui/fluent_ui.dart';
 import 'package:grading_system/landing_page.dart';
-import 'package:sqflite_common_ffi/sqflite_ffi.dart';
-void main() async {
+import 'package:grading_system/model/school.dart';
+import 'package:hive/hive.dart';
+import 'package:hive_flutter/hive_flutter.dart';
+
+Future main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  sqfliteFfiInit();
+  await Hive.initFlutter();
+  Hive.registerAdapter(SchoolAdapter());
+  Hive.registerAdapter(StudentAdapter());
+  Hive.registerAdapter(SubjectsAdapter());
+  await Hive.openBox<School>('School');
+  await Hive.openBox<School>('Student');
+  await Hive.openBox<School>('Subject');
   runApp(const MyApp());
 }
 
