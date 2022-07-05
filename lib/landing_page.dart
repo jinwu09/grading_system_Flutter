@@ -10,6 +10,8 @@ class Landingpage extends StatefulWidget {
 }
 
 class _LandingPageState extends State<Landingpage> {
+  late int test = 1;
+  bool isdisable = false;
   String? school_year;
   String school_name = '';
   int index = 0;
@@ -43,7 +45,7 @@ class _LandingPageState extends State<Landingpage> {
           onChanged: (i) => setState(() {
                 index = i;
               }),
-          displayMode: PaneDisplayMode.compact,
+          displayMode: PaneDisplayMode.top,
           items: [
             PaneItem(
                 icon: Icon(FluentIcons.folder), title: Text("School Data")),
@@ -52,46 +54,53 @@ class _LandingPageState extends State<Landingpage> {
       content: NavigationBody(
         index: index,
         children: [
-          Padding(
-            padding: const EdgeInsets.fromLTRB(5, 0, 0, 0),
-            child: ScaffoldPage(
-              header: Text('Grading System'),
-              content: Row(
+          // Grading Page
+          ScaffoldPage(
+            content: Padding(
+              padding: const EdgeInsets.fromLTRB(10, 0, 10, 5),
+              child: Row(
                 children: [
                   Column(
                     children: [
                       Container(
-                        height: MediaQuery.of(context).size.height - 50,
+                        height: MediaQuery.of(context).size.height - 90,
                         alignment: Alignment.topLeft,
                         padding: const EdgeInsets.fromLTRB(10, 10, 10, 10),
                         decoration: BoxDecoration(
-                          color: Color.fromARGB(255, 219, 218, 218),
+                          border: Border.all(color: Colors.grey),
                           borderRadius: BorderRadius.circular(8),
                         ),
                         child: Row(
                           children: [
-                            Text('Schools'),
-                            Button(
-                                child: Text('Add School'),
-                                onPressed: () {
-                                  index++;
-                                  ContentDialog(
-                                    title: Text('Add School'),
-                                    content: TextBox(
-                                      controller: null,
-                                      header: 'School Name',
-                                      placeholder: 'School name',
-                                    ),
-                                    backgroundDismiss: true,
-                                    actions: [
-                                      Button(
-                                          child: Text('add Schoool'),
-                                          onPressed: () {
-                                            Navigator.pop(context);
+                            Column(
+                              children: [
+                                Text('Schools'),
+                                Button(
+                                    child: Text('Add School'),
+                                    onPressed: isdisable
+                                        ? null
+                                        : () {
+                                            test = test + 1;
+                                            ContentDialog(
+                                              title: Text('Add School'),
+                                              content: TextBox(
+                                                controller: null,
+                                                header: 'School Name',
+                                                placeholder: 'School name',
+                                              ),
+                                              backgroundDismiss: true,
+                                              actions: [
+                                                Button(
+                                                    child: Text('add Schoool'),
+                                                    onPressed: () {
+                                                      Navigator.pop(context);
+                                                    })
+                                              ],
+                                            );
                                           })
-                                    ],
-                                  );
-                                })
+                              ],
+                            ),
+                            Text(test.toString())
                           ],
                         ),
                       ),
@@ -102,11 +111,11 @@ class _LandingPageState extends State<Landingpage> {
                     child: Column(
                       children: [
                         Container(
-                          height: MediaQuery.of(context).size.height - 50,
+                          height: MediaQuery.of(context).size.height - 90,
                           alignment: Alignment.topLeft,
                           padding: const EdgeInsets.fromLTRB(10, 10, 10, 10),
                           decoration: BoxDecoration(
-                            color: Color.fromARGB(255, 219, 218, 218),
+                            border: Border.all(color: Colors.grey),
                             borderRadius: BorderRadius.circular(8),
                           ),
                           child: Row(
@@ -144,12 +153,12 @@ class _LandingPageState extends State<Landingpage> {
                     child: Column(
                       children: [
                         Container(
-                          width: MediaQuery.of(context).size.width - 400,
-                          height: MediaQuery.of(context).size.height - 50,
+                          width: MediaQuery.of(context).size.width - 380,
+                          height: MediaQuery.of(context).size.height - 90,
                           alignment: Alignment.topLeft,
                           padding: const EdgeInsets.fromLTRB(10, 10, 10, 10),
                           decoration: BoxDecoration(
-                            color: Color.fromARGB(255, 219, 218, 218),
+                            border: Border.all(color: Colors.grey),
                             borderRadius: BorderRadius.circular(8),
                           ),
                           child: Row(
@@ -186,8 +195,25 @@ class _LandingPageState extends State<Landingpage> {
               ),
             ),
           ),
-          ScaffoldPage(
-            header: Text('sample2'),
+          // SettingsPage
+          //
+          //
+          Row(
+            children: [
+              ScaffoldPage(
+                header: Container(
+                    margin: const EdgeInsets.fromLTRB(10, 0, 0, 0),
+                    child: Text(
+                      "Settings",
+                      style: TextStyle(fontSize: 20),
+                    )),
+                content: Text(
+                  'data',
+                  style: TextStyle(fontSize: 10),
+                ),
+                bottomBar: Text('hey there'),
+              ),
+            ],
           ),
         ],
       ),
