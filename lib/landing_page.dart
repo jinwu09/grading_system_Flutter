@@ -10,7 +10,8 @@ class Landingpage extends StatefulWidget {
 }
 
 class _LandingPageState extends State<Landingpage> {
-  late int test = 1;
+  final textcontoller = TextEditingController();
+  late String test = 'default';
   bool isdisable = false;
   String? school_year;
   String school_name = '';
@@ -25,6 +26,7 @@ class _LandingPageState extends State<Landingpage> {
 
   @override
   void initState() {
+    textcontoller.addListener(() {});
     super.initState();
   }
 
@@ -35,6 +37,31 @@ class _LandingPageState extends State<Landingpage> {
 
     final box = Boxes.getSchool();
     box.add(school);
+  }
+
+  void EditContentDialog(BuildContext context) async {
+    final result = await showDialog(
+      context: context,
+      builder: (context) => ContentDialog(
+        title: Text('Add School'),
+        content: TextBox(
+          controller: textcontoller,
+          header: 'School Name',
+          placeholder: 'School name',
+        ),
+        backgroundDismiss: true,
+        actions: [
+          Button(
+              child: Text('Cancel'), onPressed: () => Navigator.pop(context)),
+          Button(
+              child: Text('Add School'),
+              onPressed: () {
+                setState(() {});
+                Navigator.pop(context);
+              }),
+        ],
+      ),
+    );
   }
 
   @override
@@ -74,33 +101,22 @@ class _LandingPageState extends State<Landingpage> {
                           children: [
                             Column(
                               children: [
-                                Text('Schools'),
-                                Button(
-                                    child: Text('Add School'),
-                                    onPressed: isdisable
-                                        ? null
-                                        : () {
-                                            test = test + 1;
-                                            ContentDialog(
-                                              title: Text('Add School'),
-                                              content: TextBox(
-                                                controller: null,
-                                                header: 'School Name',
-                                                placeholder: 'School name',
-                                              ),
-                                              backgroundDismiss: true,
-                                              actions: [
-                                                Button(
-                                                    child: Text('add Schoool'),
-                                                    onPressed: () {
-                                                      Navigator.pop(context);
-                                                    })
-                                              ],
-                                            );
-                                          })
+                                Row(
+                                  children: [
+                                    Text('Schools'),
+                                    Button(
+                                        child: Text('Add School'),
+                                        onPressed: isdisable
+                                            ? null
+                                            : () {
+                                                EditContentDialog(context);
+                                              })
+                                  ],
+                                ),
+                                Text(
+                                    'this is textcontroller ${textcontoller.text}'),
                               ],
                             ),
-                            Text(test.toString())
                           ],
                         ),
                       ),
@@ -217,10 +233,6 @@ class _LandingPageState extends State<Landingpage> {
           ),
         ],
       ),
-      // content: NavigationBody(
-      //   index: 0,
-      //   children: [Text(index.toString())],
-      // ),
     );
   }
 }
