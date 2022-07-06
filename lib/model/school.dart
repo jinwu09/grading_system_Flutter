@@ -1,33 +1,35 @@
 import 'package:hive/hive.dart';
 
 part 'school.g.dart';
+
 @HiveType(typeId: 0)
-class School extends HiveObject{
+class School extends HiveObject {
   @HiveField(0)
-  late String SchoolName;
-  
+  late String schoolName;
+
   @HiveField(1)
-  late String SchoolYear;
+  late String schoolYear;
 }
 
 @HiveType(typeId: 1)
-class Student extends HiveObject{
+class Student extends HiveObject {
   @HiveField(0)
-  late String StudentName;
+  late String studentName;
 
-@HiveField(1)
-  late String StudentSchoolYear;
+  @HiveField(1)
+  late String studentSchoolYear;
 
-@HiveField(2)
-  late String StudentYearLevel;
+  @HiveField(2)
+  late String studentYearLevel;
 }
 
 @HiveType(typeId: 2)
-class Subjects extends HiveObject{
+class Subjects extends HiveObject {
   @HiveField(0)
-  late String SubjectName;
+  late String subjectName;
 
-@HiveField(1)
-  late String SubjectSchoolYear;
-
+  @HiveField(1)
+  late String subjectSchoolYear;
 }
+//flutter packages pub rub build_runner build
+// to generate (namefile).g.dart

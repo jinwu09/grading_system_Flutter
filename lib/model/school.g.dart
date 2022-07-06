@@ -17,8 +17,8 @@ class SchoolAdapter extends TypeAdapter<School> {
       for (int i = 0; i < numOfFields; i++) reader.readByte(): reader.read(),
     };
     return School()
-      ..SchoolName = fields[0] as String
-      ..SchoolYear = fields[1] as String;
+      ..schoolName = fields[0] as String
+      ..schoolYear = fields[1] as String;
   }
 
   @override
@@ -26,9 +26,9 @@ class SchoolAdapter extends TypeAdapter<School> {
     writer
       ..writeByte(2)
       ..writeByte(0)
-      ..write(obj.SchoolName)
+      ..write(obj.schoolName)
       ..writeByte(1)
-      ..write(obj.SchoolYear);
+      ..write(obj.schoolYear);
   }
 
   @override
@@ -53,9 +53,9 @@ class StudentAdapter extends TypeAdapter<Student> {
       for (int i = 0; i < numOfFields; i++) reader.readByte(): reader.read(),
     };
     return Student()
-      ..StudentName = fields[0] as String
-      ..StudentSchoolYear = fields[1] as String
-      ..StudentYearLevel = fields[2] as String;
+      ..studentName = fields[0] as String
+      ..studentSchoolYear = fields[1] as String
+      ..studentYearLevel = fields[2] as String;
   }
 
   @override
@@ -63,11 +63,11 @@ class StudentAdapter extends TypeAdapter<Student> {
     writer
       ..writeByte(3)
       ..writeByte(0)
-      ..write(obj.StudentName)
+      ..write(obj.studentName)
       ..writeByte(1)
-      ..write(obj.StudentSchoolYear)
+      ..write(obj.studentSchoolYear)
       ..writeByte(2)
-      ..write(obj.StudentYearLevel);
+      ..write(obj.studentYearLevel);
   }
 
   @override
@@ -92,8 +92,8 @@ class SubjectsAdapter extends TypeAdapter<Subjects> {
       for (int i = 0; i < numOfFields; i++) reader.readByte(): reader.read(),
     };
     return Subjects()
-      ..SubjectName = fields[0] as String
-      ..SubjectSchoolYear = fields[1] as String;
+      ..subjectName = fields[0] as String
+      ..subjectSchoolYear = fields[1] as String;
   }
 
   @override
@@ -101,9 +101,9 @@ class SubjectsAdapter extends TypeAdapter<Subjects> {
     writer
       ..writeByte(2)
       ..writeByte(0)
-      ..write(obj.SubjectName)
+      ..write(obj.subjectName)
       ..writeByte(1)
-      ..write(obj.SubjectSchoolYear);
+      ..write(obj.subjectSchoolYear);
   }
 
   @override
