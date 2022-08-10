@@ -3,7 +3,7 @@ import 'package:hive/hive.dart';
 part 'school.g.dart';
 
 @HiveType(typeId: 0)
-class School extends HiveObject {
+class Schools extends HiveObject {
   @HiveField(0)
   late String schoolName;
 
@@ -12,24 +12,27 @@ class School extends HiveObject {
 }
 
 @HiveType(typeId: 1)
-class Student extends HiveObject {
+class Students extends HiveObject {
   @HiveField(0)
-  late String studentName;
+  late int? inSubject;
 
   @HiveField(1)
-  late String studentSchoolYear;
+  late String studentName;
 
   @HiveField(2)
+  late String studentSchoolYear;
+
+  @HiveField(3)
   late String studentYearLevel;
 }
 
 @HiveType(typeId: 2)
 class Subjects extends HiveObject {
   @HiveField(0)
-  late String subjectName;
+  late int? inSchool;
 
   @HiveField(1)
-  late String subjectSchoolYear;
+  late String subjectName;
 }
-//flutter packages pub rub build_runner build
+//flutter packages pub run build_runner build
 // to generate (namefile).g.dart

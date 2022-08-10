@@ -6,23 +6,23 @@ part of 'school.dart';
 // TypeAdapterGenerator
 // **************************************************************************
 
-class SchoolAdapter extends TypeAdapter<School> {
+class SchoolsAdapter extends TypeAdapter<Schools> {
   @override
   final int typeId = 0;
 
   @override
-  School read(BinaryReader reader) {
+  Schools read(BinaryReader reader) {
     final numOfFields = reader.readByte();
     final fields = <int, dynamic>{
       for (int i = 0; i < numOfFields; i++) reader.readByte(): reader.read(),
     };
-    return School()
+    return Schools()
       ..schoolName = fields[0] as String
       ..schoolYear = fields[1] as String;
   }
 
   @override
-  void write(BinaryWriter writer, School obj) {
+  void write(BinaryWriter writer, Schools obj) {
     writer
       ..writeByte(2)
       ..writeByte(0)
@@ -37,36 +37,39 @@ class SchoolAdapter extends TypeAdapter<School> {
   @override
   bool operator ==(Object other) =>
       identical(this, other) ||
-      other is SchoolAdapter &&
+      other is SchoolsAdapter &&
           runtimeType == other.runtimeType &&
           typeId == other.typeId;
 }
 
-class StudentAdapter extends TypeAdapter<Student> {
+class StudentsAdapter extends TypeAdapter<Students> {
   @override
   final int typeId = 1;
 
   @override
-  Student read(BinaryReader reader) {
+  Students read(BinaryReader reader) {
     final numOfFields = reader.readByte();
     final fields = <int, dynamic>{
       for (int i = 0; i < numOfFields; i++) reader.readByte(): reader.read(),
     };
-    return Student()
-      ..studentName = fields[0] as String
-      ..studentSchoolYear = fields[1] as String
-      ..studentYearLevel = fields[2] as String;
+    return Students()
+      ..inSubject = fields[0] as int?
+      ..studentName = fields[1] as String
+      ..studentSchoolYear = fields[2] as String
+      ..studentYearLevel = fields[3] as String;
   }
 
   @override
-  void write(BinaryWriter writer, Student obj) {
+  void write(BinaryWriter writer, Students obj) {
     writer
-      ..writeByte(3)
+      ..writeByte(4)
       ..writeByte(0)
-      ..write(obj.studentName)
+      ..write(obj.inSubject)
       ..writeByte(1)
-      ..write(obj.studentSchoolYear)
+      ..write(obj.studentName)
       ..writeByte(2)
+      ..write(obj.studentSchoolYear)
+      ..writeByte(3)
       ..write(obj.studentYearLevel);
   }
 
@@ -76,7 +79,7 @@ class StudentAdapter extends TypeAdapter<Student> {
   @override
   bool operator ==(Object other) =>
       identical(this, other) ||
-      other is StudentAdapter &&
+      other is StudentsAdapter &&
           runtimeType == other.runtimeType &&
           typeId == other.typeId;
 }
@@ -92,8 +95,8 @@ class SubjectsAdapter extends TypeAdapter<Subjects> {
       for (int i = 0; i < numOfFields; i++) reader.readByte(): reader.read(),
     };
     return Subjects()
-      ..subjectName = fields[0] as String
-      ..subjectSchoolYear = fields[1] as String;
+      ..inSchool = fields[0] as int?
+      ..subjectName = fields[1] as String;
   }
 
   @override
@@ -101,9 +104,9 @@ class SubjectsAdapter extends TypeAdapter<Subjects> {
     writer
       ..writeByte(2)
       ..writeByte(0)
-      ..write(obj.subjectName)
+      ..write(obj.inSchool)
       ..writeByte(1)
-      ..write(obj.subjectSchoolYear);
+      ..write(obj.subjectName);
   }
 
   @override
